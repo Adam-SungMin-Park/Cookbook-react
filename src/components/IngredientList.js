@@ -13,7 +13,7 @@ export default function IngredientList({ingredients}){
   }
 
   )
-  console.log(ingredients)
+
 
 
   return (

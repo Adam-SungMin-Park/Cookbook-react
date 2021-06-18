@@ -4,8 +4,7 @@ import Ingredient from './Ingredient';
 import Recipe from './Recipe';
 import RecipeList from './RecipeList';
 import '../css/app.css'
-
-
+import { uuid } from 'uuidv4';
 
 
 function App() {
@@ -47,17 +46,40 @@ function App() {
           id:4,
           name:"Paprika",
           amount: "3 tbs"
+        },
+
+      ]
+    },
+
+  ]
+  const [recipes, setRecipes] = useState(sampleRecipes);
+
+
+  function handleRecipeAdd(){
+    const newRecipe = {
+      id:uuid(),
+      name:"New",
+      servings:1,
+      cookTime:"1:00",
+      instructions:"intructions",
+      ingredients:[
+        {
+          id:uuid(),
+          name:'Name',
+          amount:"1 kg"
         }
       ]
     }
-  ]
+    setRecipes([...recipes, newRecipe])
+  }
 
-
-
+ console.log(recipes)
   return (
+
     <>
       <RecipeList
         recipes = {sampleRecipes}
+        handleRecipeAdd = {handleRecipeAdd}
       />
 
     </>
