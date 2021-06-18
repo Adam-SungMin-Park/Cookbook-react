@@ -3,35 +3,36 @@ import IngredientList from './IngredientList';
 
 export default function Recipe({name, cookTime, servings, instructions, ingredients}){
   return(
-    <div>
-      <div>
-        <h3>{name}</h3>
+    <div className = "recipe">
+      <div className = "recipeHeader">
+        <h3 className = "recipeTitle">{name}</h3>
         <div>
-          <button>Edit</button>
-          <button>Delete</button>
+          <button className = "button button-primary mr-1">Edit</button>
+          <button className = "button button-danger">Delete</button>
         </div>
-        <div>
-          <span>Cook Time:</span>
-          <span>{cookTime}</span>
+      </div>
+        <div className = "recipeRow">
+          <span className = "recipeLabel">Cook Time:</span>
+          <span className ="recipeValue">{cookTime}</span>
         </div>
-        <div>
-          <span>Servings :</span>
-          <span>{servings}</span>
+        <div className = "recipeRow">
+          <span className = "recipeLabel">Servings :</span>
+          <span className ="recipeValue">{servings}</span>
         </div>
-        <div>
-          <span>Instructions: </span>
-          <div>
+        <div className = "recipeRow">
+          <span className ="recipeLabel">Instructions: </span>
+          <div className ="recipeValue recipeValueIndented recipeInstructions" >
             {instructions}
           </div>
         </div>
-        <div>
-          <span>Ingredient: </span>
-          <div>
+        <div className = "recipeRow">
+          <span className ="recipeLabel">Ingredient: </span>
+          <div className ="recipeValue recipeValueIndented" >
             <IngredientList ingredients = {ingredients}/>
           </div>
         </div>
       </div>
-    </div>
+
   )
 
 

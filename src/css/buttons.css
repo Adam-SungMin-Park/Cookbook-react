@@ -17,3 +17,11 @@
 .button-primary:hover {
   background-color: hsl(200, 100%, 35%);
 }
+.button-danger {
+  color: white;
+  background-color: hsl(0, 100%, 50%);
+}
+
+.button-danger:hover {
+  background-color: hsl(0, 100%, 35%);
+}

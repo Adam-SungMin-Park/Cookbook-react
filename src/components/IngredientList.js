@@ -17,7 +17,7 @@ export default function IngredientList({ingredients}){
 
 
   return (
-    <div>
+    <div className = "ingredientGrid">
       {ingredientItems}
     </div>
     )
