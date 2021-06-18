@@ -4,7 +4,7 @@ import { RecipeContext } from './App';
 
 export default function RecipeList({recipes}){
 
-  const {handleRecipeAdd , handleRecipeDelete} = useContext(RecipeContext)
+  const {handleRecipeAdd } = useContext(RecipeContext)
 
 
   return(
