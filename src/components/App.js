@@ -7,12 +7,22 @@ import '../css/app.css'
 import { uuid } from 'uuidv4';
 
 export const RecipeContext = React.createContext();
+const localStorageKey = 'ReactCooking.Recipes'
 
 function App() {
     const [recipes, setRecipes] = useState(sampleRecipes);
     useEffect(()=>{
-      console.log('rendered ')
-    })
+          const recipeJSON = localStorage.getItem(localStorageKey)
+          if(recipeJSON !== null) setRecipes(JSON.parse(recipeJSON))
+        },[])
+
+    useEffect(()=>{
+      localStorage.setItem(localStorageKey,JSON.stringify(recipes))
+      return ()=>{
+      }
+    },[recipes])
+
+
 
     const RecipeContextValue = {
       handleRecipeAdd ,
