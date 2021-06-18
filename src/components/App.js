@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,  useEffect} from 'react';
 import IngredientList from './IngredientList';
 import Ingredient from './Ingredient';
 import Recipe from './Recipe';
@@ -6,9 +6,61 @@ import RecipeList from './RecipeList';
 import '../css/app.css'
 import { uuid } from 'uuidv4';
 
+export const RecipeContext = React.createContext();
 
 function App() {
-  const sampleRecipes =[
+    const [recipes, setRecipes] = useState(sampleRecipes);
+    useEffect(()=>{
+      console.log('rendered ')
+    })
+
+    const RecipeContextValue = {
+      handleRecipeAdd ,
+      handleRecipeDelete :handleRecipeDelete
+    }
+  function handleRecipeAdd(){
+    const newRecipe = {
+      id:uuid(),
+      name:"New",
+      servings:1,
+      cookTime:"1:00",
+      instructions:"intructions",
+      ingredients:[
+        {
+          id:uuid(),
+          name:'Name',
+          amount:"1 kg"
+        }
+      ]
+    }
+    setRecipes([...recipes, newRecipe])
+  }
+
+  function handleRecipeDelete(id){
+    setRecipes(recipes.filter(recipe => recipe.id !== id))
+  }
+
+
+
+
+ console.log(recipes)
+  return (
+
+    <RecipeContext.Provider value = {RecipeContextValue}>
+      <RecipeList
+        recipes = {recipes}
+        handleRecipeAdd = {handleRecipeAdd}
+        handleRecipeDelete = {handleRecipeDelete}
+      />
+    </RecipeContext.Provider>
+
+
+
+  )
+
+
+}
+const sampleRecipes =[
     {
       id:1,
       name: 'Chicken food',
@@ -52,41 +104,5 @@ function App() {
     },
 
   ]
-  const [recipes, setRecipes] = useState(sampleRecipes);
-
-
-  function handleRecipeAdd(){
-    const newRecipe = {
-      id:uuid(),
-      name:"New",
-      servings:1,
-      cookTime:"1:00",
-      instructions:"intructions",
-      ingredients:[
-        {
-          id:uuid(),
-          name:'Name',
-          amount:"1 kg"
-        }
-      ]
-    }
-    setRecipes([...recipes, newRecipe])
-  }
-
- console.log(recipes)
-  return (
-
-    <>
-      <RecipeList
-        recipes = {sampleRecipes}
-        handleRecipeAdd = {handleRecipeAdd}
-      />
-
-    </>
-
-  )
-
-
-}
 
 export default App;
