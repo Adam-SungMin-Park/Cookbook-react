@@ -1,0 +1,10 @@
+.recipeList {
+  border: 1px solid black;
+  min-height: 100vh;
+  width: 50%;
+}
+.addRecipeListButtonContainer {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
