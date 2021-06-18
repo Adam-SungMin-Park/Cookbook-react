@@ -3,7 +3,7 @@ import IngredientList from './IngredientList';
 import { RecipeContext } from './App';
 
 export default function Recipe({id,name, cookTime, servings, instructions, ingredients}){
-  const {handleRecipeDelete} = useContext(RecipeContext)
+  const {handleRecipeDelete, handleRecipeSelect} = useContext(RecipeContext)
 
 
 
@@ -12,7 +12,7 @@ export default function Recipe({id,name, cookTime, servings, instructions, ingre
       <div className = "recipeHeader">
         <h3 className = "recipeTitle">{name}</h3>
         <div>
-          <button className = "button button-primary mr-1">Edit</button>
+          <button onClick ={()=>handleRecipeSelect(id)} className = "button button-primary mr-1">Edit</button>
           <button onClick = {()=>handleRecipeDelete(id)} className = "button button-danger">Delete</button>
         </div>
       </div>

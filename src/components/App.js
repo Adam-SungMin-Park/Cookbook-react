@@ -1,7 +1,4 @@
 import React, {useState,  useEffect} from 'react';
-import IngredientList from './IngredientList';
-import Ingredient from './Ingredient';
-import Recipe from './Recipe';
 import RecipeList from './RecipeList';
 import RecipeEdit from './RecipeEdit';
 import '../css/app.css'
@@ -12,6 +9,8 @@ const localStorageKey = 'ReactCooking.Recipes'
 
 function App() {
     const [recipes, setRecipes] = useState(sampleRecipes);
+    const [selectedRecipeId, setSelectedRecipeId] = useState()
+    const selectedRecipe = recipes.find(recipe => recipe.id === selectedRecipeId)
     useEffect(()=>{
           const recipeJSON = localStorage.getItem(localStorageKey)
           if(recipeJSON !== null) setRecipes(JSON.parse(recipeJSON))
@@ -23,31 +22,49 @@ function App() {
       }
     },[recipes])
 
-
-
+    console.log(selectedRecipe)
     const RecipeContextValue = {
       handleRecipeAdd ,
-      handleRecipeDelete :handleRecipeDelete
+      handleRecipeDelete :handleRecipeDelete,
+      handleRecipeSelect,
+      handleRecipeChange
     }
+
+  function handleRecipeSelect(id){
+    setSelectedRecipeId(id);
+  }
+
   function handleRecipeAdd(){
     const newRecipe = {
       id:uuid(),
-      name:"New",
-      servings:1,
-      cookTime:"1:00",
-      instructions:"intructions",
+      name:"",
+      servings:'',
+      cookTime:"",
+      instructions:"",
       ingredients:[
         {
           id:uuid(),
-          name:'Name',
-          amount:"1 kg"
+          name:'',
+          amount:""
         }
       ]
     }
+    setSelectedRecipeId(newRecipe.id)
     setRecipes([...recipes, newRecipe])
   }
 
+  function handleRecipeChange(id,recipe){
+    const newRecipes =[...recipes]
+    const index = newRecipes.findIndex(r => r.id === id)
+    newRecipes[index] = recipe
+    setRecipes(newRecipes)
+
+  }
+
   function handleRecipeDelete(id){
+    if(selectedRecipeId !== null && selectedRecipeId ===id){
+      setSelectedRecipeId(undefined)
+    }
     setRecipes(recipes.filter(recipe => recipe.id !== id))
   }
 
@@ -59,7 +76,10 @@ function App() {
         handleRecipeAdd = {handleRecipeAdd}
         handleRecipeDelete = {handleRecipeDelete}
       />
-      <RecipeEdit/>
+      {selectedRecipe &&
+      <RecipeEdit
+        recipe = {selectedRecipe}
+      />}
     </RecipeContext.Provider>
 
 
@@ -95,7 +115,7 @@ const sampleRecipes =[
       servings: 30,
       cookTime: '5:00',
       instructions:
-      "1. FIRST\n2. SECOND\n3. THIRD ",
+      "1. Fourth\n2. Fifth\n3. Sixth ",
       ingredients:[
         {
           id:3,
