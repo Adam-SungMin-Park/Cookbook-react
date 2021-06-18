@@ -3,6 +3,7 @@ import IngredientList from './IngredientList';
 import Ingredient from './Ingredient';
 import Recipe from './Recipe';
 import RecipeList from './RecipeList';
+import RecipeEdit from './RecipeEdit';
 import '../css/app.css'
 import { uuid } from 'uuidv4';
 
@@ -50,10 +51,6 @@ function App() {
     setRecipes(recipes.filter(recipe => recipe.id !== id))
   }
 
-
-
-
- console.log(recipes)
   return (
 
     <RecipeContext.Provider value = {RecipeContextValue}>
@@ -62,6 +59,7 @@ function App() {
         handleRecipeAdd = {handleRecipeAdd}
         handleRecipeDelete = {handleRecipeDelete}
       />
+      <RecipeEdit/>
     </RecipeContext.Provider>
 
 
